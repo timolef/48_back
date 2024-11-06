@@ -67,7 +67,7 @@ app.post('/register', (req, res) => {
           const passwordMatch = await bcrypt.compare(password, user.mot_de_passe);
   
           if (passwordMatch) {
-            const token = jwt.sign({ userId: user.id, username: user.username }, 'lad53-dz41c2+', { expiresIn: '10h' });
+            const token = jwt.sign({ userId: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '10h' });
             console.log('Connexion réussie');
             res.status(200).json({ message: 'Connexion réussie', token, userId: user.id, username: user.pseudo, name: user.name, firstname: user.firstname, email: user.email, birthdate: user.birthdate, gender: user.gender, isAdmin: user.isAdmin});
           } else {
