@@ -4,15 +4,17 @@ const cors = require('cors');
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const app = express();
+require('dotenv').config();
 const port = 3000;
 const jwt = require('jsonwebtoken');
 
 // Configuration de MySQL
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'quarantehuit'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
 connection.connect(err => {
